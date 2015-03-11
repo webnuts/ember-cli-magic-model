@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-magic-model",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "1.0.0",
+  "description": "Plugin for ember-cli which autogenerates a lot of shared stuff between applications.",
   "directories": {
     "doc": "doc",
     "test": "tests"
