@@ -1,0 +1,48 @@
+<form class="form-horizontal" id="update-item-form">
+  {{#each itemValues.values as |item|}}
+    {{#if item.includeInList}}
+      <div class="form-group">
+        <label class="col-sm-2 control-label">{{item.label}}</label>
+        <div class="col-sm-10">
+          {{#if (is-same item.type 'richtext')}}
+            {{tinymce-editor name=item.key value=item.value class=item.classNames}}
+          {{else if (is-same item.type 'dropdown')}}
+            {{#if item.optionValues}}
+              {{view "select" name=item.key
+                              content=item.optionValues
+                              optionLabelPath=item.optionLabelPath
+                              selection=item.value
+                              class=item.classNames
+                              prompt=item.prompt}}
+            {{/if}}
+          {{else if (is-same item.type 'checkbox-list')}}
+            {{#each item.optionValues as |optionValue|}}
+              {{label-checkbox class="checkbox" selection=item.value value=optionValue label=optionValue.name name=item.key}}
+            {{/each}}
+          {{else if (is-same item.type 'number')}}
+            {{input name=item.key value=item.value class=item.classNames type='number'}}
+          {{else if (is-same item.type 'date')}}
+            {{bootstrap-date-picker name=item.key date=item.value class=item.classNames}}
+          {{else if (is-same item.type 'list-view')}}
+            {{list-view collection=item.value columns=item.columns}}
+          {{else if (is-same item.type 'item-view')}}
+            {{item-view item=item.value columns=item.columns}}
+          {{else if (is-same item.type 'password')}}
+            {{input name=item.key type='password' value=item.value class=item.classNames}}
+          {{else}}
+            {{input name=item.key value=item.value class=item.classNames}}
+          {{/if}}
+        </div>
+      </div>
+    {{/if}}
+  {{/each}}
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      {{#each itemActions as |itemAction|}}
+        <a href="" class="btn btn-default" {{action 'itemAction' itemAction.actionName }}>
+          {{itemAction.name}}
+        </a>
+      {{/each}}
+    </div>
+  </div>
+</form>

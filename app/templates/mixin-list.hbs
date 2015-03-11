@@ -1,0 +1,47 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      {{#each columns as |column|}}
+        <th>
+          <a href="" {{action 'sortAction' column.key}}>
+            {{column.label}}
+            {{#if (is-same sortProperty column.key)}}
+              {{#if (is-same sortOrder 'descending')}}
+                <i class="fa fa-fw fa-sort-up"></i>
+              {{else}}
+                <i class="fa fa-fw fa-sort-down"></i>
+              {{/if}}
+            {{else}}
+              <i class="fa fa-fw fa-sort"></i>
+            {{/if}}
+          </a>
+        </th>
+      {{/each}}
+      {{#each itemActions as |itemAction|}}
+        <th class="text-right">
+          &nbsp;
+        </th>
+      {{/each}}
+    </tr>
+  </thead>
+  <tbody>
+    {{#each listValues as |row|}}
+      <tr>
+        {{#each row.values as |item|}}
+          {{#if item.includeInList}}
+            <td>
+              {{format-value item.value}}
+            </td>
+          {{/if}}
+        {{/each}}
+        {{#each itemActions as |itemAction|}}
+          <td class="text-right">
+            <a href="" class="btn btn-default" {{action 'itemAction' itemAction.actionName row.item }}>
+              {{itemAction.name}}
+            </a>
+          </td>
+        {{/each}}
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
