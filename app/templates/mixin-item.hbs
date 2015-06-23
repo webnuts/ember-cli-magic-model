@@ -29,6 +29,8 @@
             {{item-view item=item.value columns=item.columns}}
           {{else if (is-same item.type 'password')}}
             {{input name=item.key type='password' value=item.value class=item.classNames}}
+          {{else if (is-same item.type 'textarea')}}
+            {{textarea name=item.key value=item.value class=item.classNames}}
           {{else}}
             {{input name=item.key value=item.value class=item.classNames}}
           {{/if}}
